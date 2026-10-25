@@ -238,9 +238,10 @@ function loadConferences(){
         const select=document.getElementById('conferenceSelect');
         select.replaceChildren(new Option('Choose conference',''));
         conferenceConfigs.forEach(c=>select.add(new Option(c.name,c.id)));
+        if(!conferenceConfigs.length){select.replaceChildren(new Option('No upcoming conferences',''));setStatus('No upcoming conferences available.');}
         if(conferenceConfigs.length===1){select.value=conferenceConfigs[0].id;}
         renderModes();
-      }else{setStatus('Could not load conference settings. Check DEV URL and deployment.');}
+      }else{document.getElementById('conferenceSelect').replaceChildren(new Option('Could not load conferences',''));setStatus('Could not load conference settings. Check DEV URL and deployment.');}
       resolve();
     }
     window[cb]=finish;
